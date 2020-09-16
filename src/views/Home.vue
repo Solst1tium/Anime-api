@@ -1,18 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-container class=" main d-flex align-items-center">  
+      <v-row class="ma-auto">
+        <v-col   cols="6" class="d-flex justify-center">
+          <v-btn depressed large color="dark" dark to="/anime">Anime</v-btn>
+        </v-col>      
+        <v-col cols="6" class="d-flex justify-center">
+          <v-btn depressed large color="dark" dark to="/manga">Manga</v-btn>
+        </v-col>
+      </v-row>  
+  </v-container>
 </template>
-
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+ 
+<script> 
+import {mapState, mapActions} from'vuex'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
-  }
+  },
+  computed: {
+    ...mapState(['animes', 'anime'])
+  },
+  methods: {
+    ...mapActions(['getAnimes'])
+  },
+
 }
 </script>
+<style>
+  .main{
+    height: 80vh;
+  }
+</style>
