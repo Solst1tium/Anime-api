@@ -3,7 +3,7 @@
     <v-container>
        <v-row>
          <v-col>
-      <h1>Contenido de Anime</h1>
+      <h1>Contenido de Manga</h1>
       <h1>{{animes.results}}</h1>
       </v-col>
       </v-row>

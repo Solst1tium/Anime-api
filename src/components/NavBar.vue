@@ -1,9 +1,8 @@
 <template>
     <div>
-      <v-app-bar app color="grey darken-4" dark>
+      <v-app-bar app color="grey darken-4" dark src="../assets/navbar.png">        
         <v-spacer></v-spacer>
-        <v-btn to="/" text>Home</v-btn>
-        
+        <v-btn to="/" text>Home</v-btn>        
         <v-spacer></v-spacer>
       </v-app-bar>
     </div>
@@ -17,5 +16,8 @@
 </script>
  
 <style>
+.v-app-bar{
+  background-image: '../assets/navbar.png';
+}
  
 </style>

@@ -9,9 +9,20 @@ export default new Vuex.Store({
     anime: undefined,
     mangas: [],
     manga: undefined,
-   
-
-  },
+    selectedItem: null,
+    items: [
+      {label: 'Action', value: 1},
+      {label: 'Adventure', value: 2},
+      {label:  'Cars', value: 3},
+      {label: 'Comedy', value: 4},
+      {label: 'Dementia', value: 5},
+      {label: 'Demons', value: 6},
+      {label: 'Mystery', value: 7},
+      {label: 'Drama', value: 8},
+      {label: 'Ecchi', value: 9},
+      {label: 'Fantasy', value: 10} 
+    ]
+ },
   mutations: {
     GET_MANGAS(state, mangas){
       state.mangas = mangas
