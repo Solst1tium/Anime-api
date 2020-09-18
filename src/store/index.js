@@ -9,9 +9,9 @@ export default new Vuex.Store({
     anime: undefined,
     mangas: [],
     manga: undefined,
-    selectedItem: null,
+    selectedItem: '1',
     items: [
-      {label: 'Action', value: 1},
+      {label: 'Action', value: 1, default: true},
       {label: 'Adventure', value: 2},
       {label:  'Cars', value: 3},
       {label: 'Comedy', value: 4},
@@ -37,29 +37,42 @@ export default new Vuex.Store({
     GET_ANIME(state, anime){
       state.anime = anime
     },
+    SET_SELECTED(state, newValue){
+      state.selectedItem = newValue
+    }
   },
   actions: {
-    getMangas({commit}){
-      axios.get('https://api.jikan.moe/v3/genre/search/manga?q=manga').then ((response) => {
-        commit('GET_MANGAS', response.data.results)
+    setSelected({commit, state}, newValue){
+      commit('SET_SELECTED', newValue)
+      return state.selectedItem
+
+    },
+    getMangas({commit, state}){
+      axios.get('https://api.jikan.moe/v3/genre/manga/' + state.selectedItem).then ((response) => {
+        commit('GET_MANGAS', response.data.manga)
       })
     },
-    getManga({commit}){
-      axios.get('https://api.jikan.moe/v3/search/manga?q=manga').then ((response) => {
+    getManga({commit}, id){
+      axios.get(`https://api.jikan.moe/v3/search/manga?q=manga${id}`).then ((response) => {
         commit('GET_MANGA', response.data)
       })
     },
-    getAnimes({commit}){
-      axios.get('https://api.jikan.moe/v3/genre/anime/14').then ((response) => {
+    getAnimes({commit, state}){
+      axios.get('https://api.jikan.moe/v3/genre/anime/' + state.selectedItem).then ((response) => {
         commit('GET_ANIMES', response.data.anime)
       })
     },
-    getAnime({commit}){
-      axios.get('https://api.jikan.moe/v3/search/anime?q=anime').then ((response) => {
+    getAnime({commit}, id){
+      axios.get(`https://api.jikan.moe/v3/search/anime?q=anime${id}`).then ((response) => {
         commit('GET_ANIME', response.data)
       })
-    }
+    },
   },
   modules: {
+  },
+  getters: {
+    selected: (state) => {       
+     return state.selectedItem;  
+      }
   }
 })
